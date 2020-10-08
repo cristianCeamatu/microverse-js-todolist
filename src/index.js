@@ -7,13 +7,23 @@ import '@fortawesome/fontawesome-free/js/brands';
 
 import './assets/style.scss';
 
+import Navbar from './components/Navbar';
+import Aside from './components/Aside';
+import Main from './components/Main';
+import Item from './components/Item';
+
 function component() {
   const element = document.createElement('div');
 
-  element.innerHTML = 'Hello world1!';
-  element.classList.add('h3');
-
+  element.innerHTML = `
+    ${Navbar().outerHTML}
+    <div class="d-flex">
+      ${Aside().outerHTML}
+      ${Main().outerHTML}
+      ${Item().outerHTML}
+    </div>
+  `;
   return element;
 }
 
-// document.body.appendChild(component());
+document.body.prepend(component());

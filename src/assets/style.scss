@@ -1,3 +1,70 @@
-body {
+$theme-primary: #0078D7;
+$text-theme-primary: #465efc;
+$text-theme-dark: #34373d;
 
+a {
+  color: inherit;
+}
+
+button,
+button:focus,
+button:active {
+  border: none;
+  background: inherit;
+  outline: none;
+}
+
+header {
+  background-color: $theme-primary;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  
+  .input-group {
+    width: 100%;
+    min-width: 400px;
+
+    .input-group-text,
+    .form-control {
+      font-size: 12px;
+      background-color: lighten($theme-primary, 40%);
+    }
+
+    @media(max-width: 768px) {
+      min-width: 50px;
+    }
+
+  }
+}
+
+aside {
+  max-width: 25%;
+  word-break: break-all;
+  background: repeat-y 50% 0;
+  min-height: 100vh;
+  font-size: 14px;
+  position: relative;
+
+  svg,
+  button {
+    color: $text-theme-primary;
+  }
+
+  ul li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .count {
+      word-break: normal;
+    }
+  }
+
+  .side-nav-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }

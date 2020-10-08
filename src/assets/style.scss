@@ -1,5 +1,5 @@
 $theme-primary: #0078D7;
-$text-theme-primary: #465efc;
+$text-theme-primary: #5a70fd;
 $text-theme-dark: #34373d;
 
 a {
@@ -12,6 +12,10 @@ button:active {
   border: none;
   background: inherit;
   outline: none;
+}
+
+.text-color-primary {
+  color: $text-theme-primary;
 }
 
 header {
@@ -38,10 +42,10 @@ header {
 }
 
 aside {
-  max-width: 25%;
+  min-width: 20%;
   word-break: break-all;
   background: repeat-y 50% 0;
-  min-height: 100vh;
+  min-height: 95vh;
   font-size: 14px;
   position: relative;
 
@@ -50,7 +54,7 @@ aside {
     color: $text-theme-primary;
   }
 
-  ul li {
+  ul li a {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -61,10 +65,62 @@ aside {
     }
   }
 
+  ul.group-links li a {
+    margin-bottom: 0;
+  }
+
   .side-nav-footer {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
   }
+}
+
+main {
+  .main-header-links {
+    font-size: 14px;
+  }
+  
+  section.main li {
+    padding: 15px 15px 15px 0;
+    border-bottom: 1px solid rgba(160, 160, 160, 0.281);
+  }
+
+  .main-items {
+    input {
+      margin: 0 10px;
+    }
+  }
+
+  .add-todo-form {
+    input {
+      color: $text-theme-primary;
+    }
+
+    input::placeholder {
+      color: $text-theme-primary;
+    }
+
+    input:focus,
+    input:active {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+.item-show {
+  width: 600px;
+
+  .main-item-text {
+    min-height: 5em;
+  }
+}
+
+.editable {
+  padding: 5px;
+  width: 100%;
+  overflow: auto;
 }

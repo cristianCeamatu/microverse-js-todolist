@@ -2,14 +2,17 @@ import shortid from 'shortid';
 
 function initializeState() {
   const state =
-    localStorage.getItem('state') === null ? {
-      todos: [],
-      lists: [{
-        name: 'default',
-        todos: 0,
-      }, ],
-    } :
-    JSON.parse(localStorage.getItem('state'));
+    localStorage.getItem('state') === null
+      ? {
+          todos: [],
+          lists: [
+            {
+              name: 'default',
+              todos: 0,
+            },
+          ],
+        }
+      : JSON.parse(localStorage.getItem('state'));
 
   return state;
 }
@@ -25,15 +28,12 @@ function addList(name, state) {
   location.reload();
 }
 
-function addTodo({
-  todo,
-  list
-}, state) {
-  console.log(todo, list, state);
+function addTodo({ todo, list }, state) {
   state.todos.push({
     id: shortid.generate(),
     todo,
     list,
+    priority: 'normal',
   });
   state.lists.map((el) => {
     if (el.name === list) {
@@ -55,9 +55,9 @@ function toggleStatus(id, state) {
 }
 
 function removeTodo(id, state) {
-  const todo = state.todos.find(todo => todo.id === id);
-  state.todos = state.todos.filter(el => el.id !== id);
-  state.lists.map(list => {
+  const todo = state.todos.find((todo) => todo.id === id);
+  state.todos = state.todos.filter((el) => el.id !== id);
+  state.lists.map((list) => {
     if (list.name === todo.list) {
       list.todos -= 1;
     }
@@ -68,11 +68,23 @@ function removeTodo(id, state) {
   location.reload();
 }
 
+function editTodoField(id, field, value, state) {
+  state.todos.map((todo) => {
+    if (todo.id === id) {
+      todo[field] = value;
+    }
+    return todo;
+  });
+  console.table(state);
 
-export {
+  localStorage.setItem('state', JSON.stringify(state));
+}
+
+export default {
   initializeState,
   addList,
   addTodo,
   toggleStatus,
   removeTodo,
+  editTodoField,
 };

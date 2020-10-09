@@ -1,14 +1,8 @@
-import {
-  addList,
-  addTodo,
-  toggleStatus,
-  removeTodo,
-  initializeState
-} from '../state';
+import stateActions from '../state';
 
 import dom from './dom';
 
-const state = initializeState();
+const state = stateActions.initializeState();
 
 function formToggler(clicker, element) {
   document.querySelector(clicker).addEventListener('click', (e) => {
@@ -23,7 +17,7 @@ function formToggler(clicker, element) {
 function checkboxListener() {
   document.querySelectorAll('.todo_toggle_status').forEach((el) => {
     el.addEventListener('click', (e) => {
-      toggleStatus(e.target.getAttribute('data-id'), state);
+      stateActions.toggleStatus(e.target.getAttribute('data-id'), state);
     });
   });
 
@@ -33,12 +27,59 @@ function checkboxListener() {
 function addTodoForm(clicker, state) {
   document.querySelector(clicker).addEventListener('submit', (e) => {
     e.preventDefault();
-    addTodo({
+    stateActions.addTodo(
+      {
         todo: e.target.elements.todo.value,
         list: e.target.getAttribute('data-list'),
       },
       state
     );
+  });
+
+  return this;
+}
+
+function listFormSubmit(form, state) {
+  document.querySelector(form).addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = e.target.elements.name.value;
+    stateActions.addList(name, state);
+    e.target.reset();
+  });
+
+  return this;
+}
+
+function removeTodoListener() {
+  document.querySelectorAll('.remove-todo').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      stateActions.removeTodo(e.target.getAttribute('data-id'), state);
+    });
+  });
+
+  return this;
+}
+
+function editTodoFields() {
+  document.querySelectorAll('.edit-todo').forEach((el) => {
+    el.addEventListener('input', (e) => {
+      const id = e.target.getAttribute('data-id');
+      const field = e.target.getAttribute('data-field');
+      const { value } = e.target;
+
+      stateActions.editTodoField(id, field, value, state);
+    });
+  });
+}
+
+function showTodoToggler() {
+  document.querySelectorAll('.show-todo-toggler').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      dom.toggleShowItem(e.target.getAttribute('data-id'));
+
+      checkboxListener();
+      editTodoFields();
+    });
   });
 
   return this;
@@ -53,31 +94,14 @@ function listNavigation(clicker) {
       e.target.classList.add('active');
 
       dom.setListTodos(e.target.getAttribute('data-list'));
+
       checkboxListener(state);
+      removeTodoListener(state);
+      showTodoToggler();
+
       if (el.getAttribute('data-list') !== 'due-or-passed') {
         addTodoForm('#add-todo-form', state);
       }
-    });
-  });
-
-  return this;
-}
-
-function listFormSubmit(form, state) {
-  document.querySelector(form).addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = e.target.elements.name.value;
-    addList(name, state);
-    e.target.reset();
-  });
-
-  return this;
-}
-
-function removeTodoListener() {
-  document.querySelectorAll('.remove-todo').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      removeTodo(e.target.getAttribute('data-id'), state);
     });
   });
 
@@ -91,4 +115,5 @@ export default {
   addTodoForm,
   checkboxListener,
   removeTodoListener,
+  showTodoToggler,
 };

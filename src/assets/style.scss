@@ -110,7 +110,7 @@ main {
       transform: scale(1.1);
     }
 
-    .remove-todo>* {
+    .remove-todo > * {
       pointer-events: none;
     }
   }
@@ -133,7 +133,7 @@ main {
 }
 
 .item-show {
-  width: 600px;
+  width: 500px;
 
   .main-item-text {
     min-height: 5em;

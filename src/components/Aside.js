@@ -16,13 +16,13 @@ export default function component({
       <button class="my-4" id="side-nav-toggler"><i class="fas fa-bars"></i></button>
 
       <ul class="list-unstyled side-nav-header-links pb-1 border-bottom mb-0" id="side-nav-header">
-        <li class="pb-0">
-            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation active" data-list="due-or-passed">Due today or passed</a></span>
-            <span class="count ml-3 hide-on-toggle">${dueOrPassed.length}</span>
-        </li>
         <li>
-            <span><i class="fas fa-home"></i> <a href="#" class="list-navigation" data-list="default">Without a list</a></span>
-            <span class="count ml-3 hide-on-toggle">${itemsWithoutList.length}</span>
+          <span><i class="fas fa-home"></i> <a href="#" class="list-navigation active" data-list="default">Without a list</a></span>
+          <span class="count ml-3 hide-on-toggle">${itemsWithoutList.length}</span>
+        </li>
+        <li class="pb-0">
+            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation" data-list="due-or-passed">Due today or passed</a></span>
+            <span class="count ml-3 hide-on-toggle">${dueOrPassed.length}</span>
         </li>
       </ul>
 
@@ -34,7 +34,7 @@ export default function component({
         <a href="#" id="add-list-toggler" class="mx-1 btn btn-info btn-sm d-block w-50 mx-auto"><i class="fas fa-list-ul text-white"></i> Add list</a>
         <form id="add-list-form" class="text-left p-3 shadow-sm hide">
           <div class="form-group">
-            <input type="text" class="form-control" name="name" id="name" maxlength="15" minlength="2" placeholder="Enter title">
+            <input type="text" class="form-control" name="name" id="name" pattern=".{3,20}" required title="Between 3-20 characters accepted" placeholder="Enter name">
           </div>
           <button type="submit" class="btn btn-info btn-sm d-block w-50 my-3 mx-auto">Submit</button>
         </form>

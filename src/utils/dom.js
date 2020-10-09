@@ -1,3 +1,13 @@
-function refreshDom(state) {}
+import Main from '../components/Main';
+import {
+  initializeState,
+} from '../state';
 
-export default refreshDom;
+function setListTodos(list) {
+  const state = initializeState();
+  document.querySelector('#main-todos').innerHTML = Main(state.todos, list);
+}
+
+export default {
+  setListTodos,
+};

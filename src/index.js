@@ -11,24 +11,20 @@ import Navbar from './components/Navbar';
 import Aside from './components/Aside';
 import Main from './components/Main';
 import Item from './components/Item';
-import {
-  formToggler,
-  listFormSubmit,
-  listNavigation,
-} from './utils/listeners';
+import listener from './utils/listeners';
 
-import {
-  initializeState,
-} from './state';
+import { initializeState } from './state';
 
-function component(state) {
+function App(state) {
   const element = document.createElement('div');
 
   element.innerHTML = `
     ${Navbar().outerHTML}
     <div class="d-flex">
       ${Aside(state).outerHTML}
-      ${Main().outerHTML}
+    <div id="main-todos" class="border w-100">
+      ${Main(state.todos)}
+    </div>
       ${Item().outerHTML}
     </div>
   `;
@@ -36,8 +32,10 @@ function component(state) {
 }
 
 const state = initializeState();
-document.body.appendChild(component(state));
+document.body.appendChild(App(state));
 
-formToggler('#add-list-toggler', '#add-list-form');
-listFormSubmit('#add-list-form', state);
-listNavigation('.list-navigation');
+listener.formToggler('#add-list-toggler', '#add-list-form');
+listener.listFormSubmit('#add-list-form', state);
+listener.listNavigation('.list-navigation', state);
+listener.addTodoForm('#add-todo-form', state);
+listener.checkboxListener(state);

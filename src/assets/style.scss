@@ -101,6 +101,18 @@ main {
     input {
       margin: 0 10px;
     }
+
+    .remove-todo {
+      cursor: pointer;
+    }
+
+    .remove-todo:hover {
+      transform: scale(1.1);
+    }
+
+    .remove-todo>* {
+      pointer-events: none;
+    }
   }
 
   .add-todo-form {

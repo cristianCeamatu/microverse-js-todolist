@@ -2,6 +2,7 @@ import {
   addList,
   addTodo,
   toggleStatus,
+  removeTodo,
   initializeState
 } from '../state';
 
@@ -73,10 +74,21 @@ function listFormSubmit(form, state) {
   return this;
 }
 
+function removeTodoListener() {
+  document.querySelectorAll('.remove-todo').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      removeTodo(e.target.getAttribute('data-id'), state);
+    });
+  });
+
+  return this;
+}
+
 export default {
   formToggler,
   listNavigation,
   listFormSubmit,
   addTodoForm,
   checkboxListener,
+  removeTodoListener,
 };

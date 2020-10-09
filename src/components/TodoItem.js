@@ -1,4 +1,8 @@
-export default function component({ todo, id, status = false }) {
+export default function component({
+  todo,
+  id,
+  status = false
+}) {
   const element = document.createElement('li');
   element.className = 'd-flex align-items-center justify-content-between';
 
@@ -7,7 +11,7 @@ export default function component({ todo, id, status = false }) {
     data-id="${id}" class="todo_toggle_status" ${status ? 'checked' : ''}>
     <p class="main-item-text mb-0 flex-fill">
       <a href="javascript:;">${todo}</a></p>
-    <a href="javascript:;" class="text-danger"><i class="fas fa-trash"></a></i>
+    <p class="text-danger remove-todo" data-id="${id}"><i class="fas fa-trash"></i></p>
   `;
 
   return element.outerHTML;

@@ -13,7 +13,9 @@ import Main from './components/Main';
 import Item from './components/Item';
 import listener from './utils/listeners';
 
-import { initializeState } from './state';
+import {
+  initializeState
+} from './state';
 
 function App(state) {
   const element = document.createElement('div');
@@ -39,3 +41,4 @@ listener.listFormSubmit('#add-list-form', state);
 listener.listNavigation('.list-navigation', state);
 listener.addTodoForm('#add-todo-form', state);
 listener.checkboxListener(state);
+listener.removeTodoListener(state);

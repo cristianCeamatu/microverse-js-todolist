@@ -2,8 +2,7 @@ import shortid from 'shortid';
 
 function initializeState() {
   const state =
-    localStorage.getItem('state') === null ?
-    {
+    localStorage.getItem('state') === null ? {
       todos: [],
       lists: [{
         name: 'default',
@@ -53,12 +52,27 @@ function toggleStatus(id, state) {
     return todo;
   });
   localStorage.setItem('state', JSON.stringify(state));
-  console.log(state.todos.find((el) => el.id === id));
 }
+
+function removeTodo(id, state) {
+  const todo = state.todos.find(todo => todo.id === id);
+  state.todos = state.todos.filter(el => el.id !== id);
+  state.lists.map(list => {
+    if (list.name === todo.list) {
+      list.todos -= 1;
+    }
+    return list;
+  });
+
+  localStorage.setItem('state', JSON.stringify(state));
+  location.reload();
+}
+
 
 export {
   initializeState,
   addList,
   addTodo,
-  toggleStatus
+  toggleStatus,
+  removeTodo,
 };

@@ -15,7 +15,7 @@ export default function component() {
       <p>Description:</p>
       <p class="flex-fill form-control ml-2 editable main-item-text" contenteditable>No notes</p>
     </div>
-    <div class="mx-3 p-3 my-2 shadow-sm">Due date: <input type="date" id="due-date" class="form-control"></div>
+    <div class="mx-3 p-3 my-2 shadow-sm">Due date: <input type="date" id="due-date" onchange="console.log(event.target.value)" class="form-control"></div>
     <div class="mx-3 p-3 my-2 shadow-sm">
       Priority:
       <select name="priority" id="priority" class="ml-2 form-control">

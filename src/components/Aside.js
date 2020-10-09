@@ -1,4 +1,13 @@
-export default function component() {
+import ListItem from './ListItem';
+
+export default function component({
+  lists,
+  todos,
+}) {
+  const addedLists = lists.filter((el) => el.name !== 'default');
+  const itemsWithoutList = todos.filter((el) => el.list === 'default');
+  const dueOrPassed = todos.filter(todo => new Date(todo.dueDate) <= new Date());
+
   const element = document.createElement('aside');
   element.classList.add('bg-light');
 
@@ -6,35 +15,29 @@ export default function component() {
     <div class="container-fluid">
       <button class="my-4" id="side-nav-toggler"><i class="fas fa-bars"></i></button>
 
-      <ul class="list-unstyled side-nav-header-links" id="side-nav-header">
-        <li><a href="javascript:;"><span><i class="fas fa-sun"></i> My day</span> <span
-              class="count ml-3">1</span></a>
+      <ul class="list-unstyled side-nav-header-links pb-1 border-bottom mb-0" id="side-nav-header">
+        <li class="pb-0">
+            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation active" data-list="due-or-passed">Due today or passed</a></span>
+            <span class="count ml-3 hide-on-toggle">${dueOrPassed.length}</span>
         </li>
-        <li><a href="javascript:;"><span><i class="fas fa-home"></i> Activities</span> <span
-              class="count ml-3">1</span></a>
+        <li>
+            <span><i class="fas fa-home"></i> <a href="#" class="list-navigation" data-list="default">Without a list</a></span>
+            <span class="count ml-3 hide-on-toggle">${itemsWithoutList.length}</span>
         </li>
       </ul>
 
       <ul class="list-unstyled side-nav-main-links" id="side-nav-main">
-        <li><a href="javascript:;"><span><i class="fas fa-list-ul"></i> Microverse</span>
-            <span class="count ml-3">10</span></a></li>
-        <li><a href="javascript:;"><span><i class="fas fa-layer-group"></i> House</span><span class="state ml-3"><i
-                class="fas fa-angle-left"></i></span></a> </li>
-        <li><a href="javascript:;"><span><i class="fas fa-layer-group"></i> Work</span> <span class="state ml-3"><i
-                class="fas fa-angle-down"></i></span></a></li>
-        <ul class="group-links pl-2 border-left mb-0">
-          <li class="d-flex align-items-center justify-content-between"><a href="javascript:;"><span><i
-                  class="fas fa-list-ul"></i> Microverse</span>
-              <span class="count ml-3"> 10</span></a>
-          </li>
-        </ul>
+        <li>${[...addedLists].map((list) => ListItem(list)).join('')}</li>
       </ul>
 
-      <div class="side-nav-actions d-flex align-items-center justify-content-between">
-        <i class="fas fa-list-ul"></i><a href="javascript:;" contenteditable class="editable form-control mx-1"> Add
-        </a>
-        <i class="fas fa-layer-group"></i><a href="javascript:;" contenteditable class="editable form-control ml-1">
-          Add</a>
+      <div class="side-nav-actions text-center">
+        <a href="#" id="add-list-toggler" class="mx-1 btn btn-info btn-sm d-block w-50 mx-auto"><i class="fas fa-list-ul text-white"></i> Add list</a>
+        <form id="add-list-form" class="text-left p-3 shadow-sm hide">
+          <div class="form-group">
+            <input type="text" class="form-control" name="name" id="name" maxlength="15" minlength="2" placeholder="Enter title">
+          </div>
+          <button type="submit" class="btn btn-info btn-sm d-block w-50 my-3 mx-auto">Submit</button>
+        </form>
       </div>
 
       <ul

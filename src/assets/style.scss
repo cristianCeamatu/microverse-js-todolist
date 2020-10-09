@@ -1,9 +1,13 @@
-$theme-primary: #0078D7;
+$theme-primary: #0078d7;
 $text-theme-primary: #5a70fd;
 $text-theme-dark: #34373d;
 
 * {
   transition: all 0.2s ease-in;
+}
+
+body {
+  font-size: 14px;
 }
 
 a {
@@ -38,10 +42,9 @@ header {
       background-color: lighten($theme-primary, 40%);
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
       min-width: 50px;
     }
-
   }
 }
 
@@ -58,7 +61,7 @@ aside {
     color: $text-theme-primary;
   }
 
-  ul li a {
+  ul li {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -127,4 +130,12 @@ main {
   padding: 5px;
   width: 100%;
   overflow: auto;
+}
+
+.hide {
+  display: none !important;
+}
+
+.active {
+  font-weight: bold;
 }

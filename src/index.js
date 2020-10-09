@@ -11,14 +11,23 @@ import Navbar from './components/Navbar';
 import Aside from './components/Aside';
 import Main from './components/Main';
 import Item from './components/Item';
+import {
+  formToggler,
+  listFormSubmit,
+  listNavigation,
+} from './utils/listeners';
 
-function component() {
+import {
+  initializeState,
+} from './state';
+
+function component(state) {
   const element = document.createElement('div');
 
   element.innerHTML = `
     ${Navbar().outerHTML}
     <div class="d-flex">
-      ${Aside().outerHTML}
+      ${Aside(state).outerHTML}
       ${Main().outerHTML}
       ${Item().outerHTML}
     </div>
@@ -26,4 +35,9 @@ function component() {
   return element;
 }
 
-document.body.prepend(component());
+const state = initializeState();
+document.body.appendChild(component(state));
+
+formToggler('#add-list-toggler', '#add-list-form');
+listFormSubmit('#add-list-form', state);
+listNavigation('.list-navigation');

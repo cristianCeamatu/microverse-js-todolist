@@ -25,7 +25,6 @@ function addList(name, state) {
     });
   }
   localStorage.setItem('state', JSON.stringify(state));
-  location.reload();
 }
 
 function addTodo({ todo, list }, state) {
@@ -41,7 +40,6 @@ function addTodo({ todo, list }, state) {
     }
   });
   localStorage.setItem('state', JSON.stringify(state));
-  location.reload();
 }
 
 function toggleStatus(id, state) {
@@ -51,6 +49,7 @@ function toggleStatus(id, state) {
     }
     return todo;
   });
+  
   localStorage.setItem('state', JSON.stringify(state));
 }
 
@@ -65,7 +64,6 @@ function removeTodo(id, state) {
   });
 
   localStorage.setItem('state', JSON.stringify(state));
-  location.reload();
 }
 
 function editTodoField(id, field, value, state) {
@@ -75,7 +73,6 @@ function editTodoField(id, field, value, state) {
     }
     return todo;
   });
-  console.table(state);
 
   localStorage.setItem('state', JSON.stringify(state));
 }

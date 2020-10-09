@@ -9,7 +9,7 @@ export default function component({
   status,
   dueDate,
 }) {
-  const tommorow = moment().add(1, 'd').format('YYYY-DD-MM');
+  const tommorow = moment().add(1, 'd').format('YYYY-MM-DD');
 
   const element = document.createElement('article');
   element.className = 'item-show py-3 px-2';
@@ -17,12 +17,7 @@ export default function component({
   element.innerHTML = `
     <div class="item-show-header mx-3 p-3 my-2 shadow-sm">
       <p>Todo:</p>
-      <div class="d-flex align-items-center justify-content-between">
-      <input type="checkbox" name="todo_toggle_status" data-id="${id}" class="todo_toggle_status" ${
-    status ? 'checked' : ''
-  } class="ml-2">
       <input type="text" class="mb-2 ml-2 flex-fill px-2 form-control edit-todo" data-field="todo" value="${todo}" rows="2" data-id="${id}">
-      </div>
     </div>
 
     <div class="mx-3 p-3 my-2 shadow-sm">
@@ -32,10 +27,10 @@ export default function component({
   }</textarea>
     </div>
 
-    <div class="mx-3 p-3 my-2 shadow-sm">Due date (${
-      !dueDate ? 'not set' : ''
-    }): <input type="date" id="due-date" class="form-control edit-todo" data-field="dueDate" value="${
-    dueDate ? moment(dueDate).format('YYYY-DD-MM') : tommorow
+    <div class="mx-3 p-3 my-2 shadow-sm">Due date ${
+      !dueDate ? '(not set)' : ''
+    }: <input type="date" id="due-date" class="form-control edit-todo" data-field="dueDate" value="${
+    dueDate ? moment(dueDate).format('YYYY-MM-DD') : tommorow
   }" data-id="${id}"></div>
 
     <div class="mx-3 p-3 my-2 shadow-sm">
@@ -47,7 +42,7 @@ export default function component({
         <option value="later" ${
           priority === 'later' && 'selected'
         }>Later</option>
-        <option value="normal" ${priority && 'selected'}>Normal</option>
+        <option value="normal" ${priority === 'normal' && 'selected'}>Normal</option>
       </select>
     </div>
 

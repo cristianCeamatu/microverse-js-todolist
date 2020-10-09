@@ -21,7 +21,9 @@ function App(state) {
   element.innerHTML = `
     ${Navbar().outerHTML}
     <div class="d-flex">
-      ${Aside(state).outerHTML}
+      <div id="aside-nav" class="bg-light">
+      ${Aside(state)}
+      </div>
       <div id="main-todos" class="border w-100">
         ${Main(state.todos)}
       </div>
@@ -36,8 +38,8 @@ const state = stateActions.initializeState();
 document.body.appendChild(App(state));
 
 listener.formToggler('#add-list-toggler', '#add-list-form');
-listener.listFormSubmit('#add-list-form', state);
 listener.listNavigation('.list-navigation', state);
+listener.addListForm('#add-list-form', state);
 listener.addTodoForm('#add-todo-form', state);
 listener.checkboxListener(state);
 listener.removeTodoListener(state);

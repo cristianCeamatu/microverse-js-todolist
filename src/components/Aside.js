@@ -1,15 +1,16 @@
+import moment from 'moment';
+
 import ListItem from './ListItem';
 
 export default function component({
   lists,
   todos,
-}) {
+}, activeList = 'default') {
   const addedLists = lists.filter((el) => el.name !== 'default');
   const itemsWithoutList = todos.filter((el) => el.list === 'default');
-  const dueOrPassed = todos.filter(todo => new Date(todo.dueDate) <= new Date());
+  const dueOrPassed = todos.filter(todo => moment(todo.dueDate).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD'));
 
   const element = document.createElement('aside');
-  element.classList.add('bg-light');
 
   element.innerHTML = `
     <div class="container-fluid">
@@ -17,26 +18,26 @@ export default function component({
 
       <ul class="list-unstyled side-nav-header-links pb-1 border-bottom mb-0" id="side-nav-header">
         <li>
-          <span><i class="fas fa-home"></i> <a href="#" class="list-navigation active" data-list="default">Without a list</a></span>
+          <span><i class="fas fa-home"></i> <a href="#" class="list-navigation ${activeList === 'default' && 'active'}" data-list="default">Without a list</a></span>
           <span class="count ml-3 hide-on-toggle">${itemsWithoutList.length}</span>
         </li>
         <li class="pb-0">
-            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation" data-list="due-or-passed">Due today or passed</a></span>
+            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation" data-list="due-or-passed">Passed/No date</a></span>
             <span class="count ml-3 hide-on-toggle">${dueOrPassed.length}</span>
         </li>
       </ul>
 
       <ul class="list-unstyled side-nav-main-links" id="side-nav-main">
-        <li>${[...addedLists].map((list) => ListItem(list)).join('')}</li>
+        <li>${[...addedLists].map((list) => ListItem(list, activeList)).join('')}</li>
       </ul>
 
       <div class="side-nav-actions text-center">
         <a href="#" id="add-list-toggler" class="mx-1 btn btn-info btn-sm d-block w-50 mx-auto"><i class="fas fa-list-ul text-white"></i> Add list</a>
-        <form id="add-list-form" class="text-left p-3 shadow-sm hide">
+        <form action="/" id="add-list-form" class="text-left p-3 shadow-sm hide">
           <div class="form-group">
             <input type="text" class="form-control" name="name" id="name" pattern=".{3,20}" required title="Between 3-20 characters accepted" placeholder="Enter name">
           </div>
-          <button type="submit" class="btn btn-info btn-sm d-block w-50 my-3 mx-auto">Submit</button>
+          <button type="submit" class="btn btn-info btn-sm d-block w-50 my-3 mx-auto text-white">Submit</button>
         </form>
       </div>
 
@@ -51,5 +52,5 @@ export default function component({
     </div>
   `;
 
-  return element;
+  return element.outerHTML;
 }

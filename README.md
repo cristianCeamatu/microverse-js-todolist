@@ -1,31 +1,19 @@
 ![Hireable](https://img.shields.io/badge/Hireable-yes-success) ![](https://img.shields.io/badge/Mobile--responsive-yes-green) ![](https://img.shields.io/badge/-Microverse%20projects-blueviolet)
 
-# Bible Talks social web app built in rails with user registration and creation of talks(tweets)/follow/unfollow users.
+# Microsoft todo web app clone built with webpack, HTML and CSS in 2 days.
 
-> In this project, we were required to build a social app where users can sign-up/sign-in/sign out, create talks(tweets), and follow/unfollow other users. The project enforced our skills in using most of the core functionalities of the Rails framework.
-> <br>
-> The app is mobile responsive and users can <b>sign up/sign in with their Github and Twitter accounts</b>. Users can upload a profile and cover images at the sign-up or after they sign in by accessing the profile page, here they can also edit their username and full name.
-> <br>
-> The app is tested using RSpec for unit and integration tests
+> The guests can create lists of todos, add/delete and edit todos based on their description/priority/due date/notes and title. The app never does a full refresh of the page and it automatically updates the DOM with every change. It is using `localStorage` for the database. <br>
+> In this project, we were required to build a todo web app using Javascript`s Objects, Factory Functions, and The Module Patterns applying the concepts of Single Responsibility and Tightly Coupled Objects.
 
 ## App functionality
 
-- Users can sign up/sign in/sign out by filling out the forms or using their Github or Twitter account
-- Users can create talks (tweets)
-- Users can upload a profile and cover images when they sign up, otherwise they will have default placeholders
-- Users can edit their profile username, full name and images
-- Users can follow and unfollow other users
-- Users can see who he is following and who are following other users
-- The app is fully mobile responsive and uploads the user images to AWS S3 with Active Storage
-
-## Video presentation of the project [here](https://www.loom.com/share/b40e1d7bda964f3d930f232d4bebfafd)
+- Guests can create lists of todos, add/delete and edit todos based on their description/priority/due date/notes and title.
 
 ## This web app is live, you can check it here: [Live demo](https://rails-bible-talks.herokuapp.com/)
 
 ## Screenshots of the app.
 
-![image](.github/app-screenshot.jpg)
-![image](.github/app-screenshot2.png) ![image](.github/app-screenshot3.png)
+![image](.github/app-screenshot.png)
 
 ## Built With
 

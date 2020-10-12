@@ -8,6 +8,7 @@
 ## App functionality
 
 - Guests can create lists of todos, add/delete and edit todos based on their description/priority/due date/notes and title.
+- The app is currently not mobile responsive.
 
 ## This web app is live, you can check it here: [Live demo](https://cristianceamatu.github.io/microverse-js-todolist/)
 

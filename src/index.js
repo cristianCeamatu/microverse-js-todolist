@@ -1,15 +1,19 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
+import '@fortawesome/fontawesome-free/js/brands';
 
 import './assets/style.scss';
 
-function component() {
-  const element = document.createElement('div');
+import listeners from './utils/listeners';
+import stateActions from './state';
 
-  element.innerHTML = 'Hello world1!';
-  element.classList.add('h3');
+import App from './components/App';
 
-  return element;
-}
+const state = stateActions.initializeState();
 
-document.body.appendChild(component());
+document.body.appendChild(App(state));
+
+listeners.init();

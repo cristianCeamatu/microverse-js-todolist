@@ -20,9 +20,15 @@ function refreshMain(state, activeList) {
   document.querySelector('#main-todos').innerHTML = Main(state.todos, activeList);
 }
 
+function updateMainAndAside(state, activeList) {
+  refreshAside(state, activeList);
+  refreshMain(state, activeList);
+}
+
 export default {
   setListTodos,
   showItem,
   refreshAside,
   refreshMain,
+  updateMainAndAside,
 };

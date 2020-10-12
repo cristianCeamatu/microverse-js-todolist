@@ -4,17 +4,16 @@ import dom from './dom';
 
 let state = stateActions.initializeState();
 
-function formToggler(clicker, element) {
-  document.querySelector(clicker).addEventListener('click', (e) => {
+function formToggler() {
+  document.querySelector('#add-list-toggler').addEventListener('click', (e) => {
     e.preventDefault();
-    e.target.classList.toggle('hide');
-    document.querySelector(element).classList.toggle('hide');
-  });
 
-  return this;
+    e.target.classList.toggle('hide');
+    document.querySelector('#add-list-form').classList.toggle('hide');
+  });
 }
 
-function checkboxListener() {
+function todoStatus() {
   document.querySelectorAll('.todo_toggle_status').forEach((el) => {
     el.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -24,32 +23,6 @@ function checkboxListener() {
       e.target.nextElementSibling.classList.toggle('todo-done');
     });
   });
-
-  return this;
-}
-
-function removeTodoListener() {
-  document.querySelectorAll('.remove-todo').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      stateActions.removeTodo(e.target.getAttribute('data-id'), state);
-
-      state = stateActions.initializeState();
-      const list = e.target.getAttribute('data-list');
-
-      dom.setListTodos(list, state);
-      dom.refreshAside(state, list);
-      dom.refreshMain(state, list);
-  
-      listNavigation('.list-navigation', state);
-      addTodoForm('#add-todo-form', state);
-      checkboxListener(state);
-      removeTodoListener(state);
-      showTodoToggler();
-      formToggler('#add-list-toggler', '#add-list-form');
-    });
-  });
-
-  return this;
 }
 
 function editTodoFields() {
@@ -65,22 +38,15 @@ function editTodoFields() {
       state = stateActions.initializeState();
 
       if (['priority', 'dueDate', 'todo'].includes(field)) {
-        dom.setListTodos(list, state);
-        dom.refreshAside(state, list);
-        dom.refreshMain(state, list);
-    
-        listNavigation('.list-navigation', state);
-        addTodoForm('#add-todo-form', state);
-        checkboxListener(state);
-        removeTodoListener(state);
-        showTodoToggler();
-        formToggler('#add-list-toggler', '#add-list-form');
+        dom.updateMainAndAside(state, list);
+
+        init();
       }
     });
   });
 }
 
-function showTodoToggler() {
+function showTodoOnClick() {
   document.querySelectorAll('.show-todo-toggler').forEach((el) => {
     el.addEventListener('click', (e) => {
       state = stateActions.initializeState();
@@ -88,43 +54,57 @@ function showTodoToggler() {
       const id = e.target.getAttribute('data-id');
       dom.showItem(id, state);
 
-      checkboxListener();
       editTodoFields();
     });
   });
-
-  return this;
 }
 
-function listNavigation(clicker) {
-  document.querySelectorAll(clicker).forEach((el) => {
+function sideNavigation() {
+  document.querySelectorAll('.list-navigation').forEach((el) => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
 
       const list = e.target.getAttribute('data-list');
-      dom.setListTodos(list, state);
+
+      dom.refreshMain(state, list);
       document.querySelector('#show-todo').innerHTML = '';
 
-      document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.list-navigation.active').forEach(el => el.classList.remove('active'));
       document.querySelector(`.list-navigation[data-list="${list}"]`).classList.add('active');
 
-      checkboxListener(state);
-      removeTodoListener(state);
-      showTodoToggler();
-
-      if (el.getAttribute('data-list') !== 'due-or-passed') {
-        addTodoForm('#add-todo-form', state);
-      }
+      todoStatus();
+      removeTodoButton();
+      showTodoOnClick();
+      if (list !== 'due-or-passed') addTodoForm(state);
     });
   });
-
-  return this;
 }
 
-function addTodoForm(clicker, state) {
-  document.querySelector(clicker).addEventListener('submit', (e) => {
+function removeTodoButton() {
+  document.querySelectorAll('.remove-todo').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      stateActions.removeTodo(e.target.getAttribute('data-id'), state);
+      const list = e.target.getAttribute('data-list');
+
+      state = stateActions.initializeState();
+
+      dom.updateMainAndAside(state, list);
+
+      formToggler();
+      sideNavigation(state);
+      addListForm(state);
+      todoStatus(state);
+      removeTodoButton(state);
+      showTodoOnClick(state);
+      if (list !== 'due-or-passed') addTodoForm(state);
+    });
+  });
+}
+
+function addTodoForm() {
+  document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    const list = e.target.getAttribute('data-list');
+    const list = e.target.getAttribute('data-list').toLowerCase();
     stateActions.addTodo(
       {
         todo: e.target.elements.todo.value,
@@ -133,46 +113,44 @@ function addTodoForm(clicker, state) {
       state,
     );
 
-    dom.setListTodos(list, state);
-    dom.refreshAside(state, list);
-    dom.refreshMain(state, list);
+    state = stateActions.initializeState();
 
-    listNavigation('.list-navigation', state);
-    addTodoForm('#add-todo-form', state);
-    addListForm('#add-list-form', state);
-    checkboxListener(state);
-    removeTodoListener(state);
-    showTodoToggler();
-    formToggler('#add-list-toggler', '#add-list-form');
+    dom.updateMainAndAside(state, list);
+
+    document.body.querySelector(`.list-navigation[data-list='${list.toLowerCase()}'`).classList.add('active');
+
+    init();
   });
-
-  return this;
 }
 
-function addListForm(form, state) {
-  document.querySelector(form).addEventListener('submit', (e) => {
+function addListForm() {
+  document.querySelector('#add-list-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = e.target.elements.name.value;
+    const name = e.target.elements.name.value.toLowerCase();
     stateActions.addList(name, state);
-    e.target.reset();
+    e.target.classList.toggle('hide');
 
-    dom.refreshAside(state, name);
-    dom.refreshMain(state, name);
+    state = stateActions.initializeState();
 
-    formToggler('#add-list-toggler', '#add-list-form');
-    addTodoForm('#add-todo-form', state);
-    listNavigation('.list-navigation', state);
-    addListForm('#add-list-form', state);
+    dom.updateMainAndAside(state, name);
+
+    document.body.querySelector(`.list-navigation[data-list='${name}'`).classList.add('active');
+
+    init();
   });
+}
+
+function init() {
+  formToggler();
+  sideNavigation(state);
+  addListForm(state);
+  addTodoForm(state);
+  todoStatus(state);
+  removeTodoButton(state);
+  showTodoOnClick(state);
 }
 
 export default {
-  formToggler,
-  listNavigation,
-  addListForm,
-  addTodoForm,
-  checkboxListener,
-  removeTodoListener,
-  showTodoToggler,
+  init,
 };

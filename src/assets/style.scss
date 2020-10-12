@@ -58,6 +58,10 @@ header {
   font-size: 14px;
   position: relative;
 
+  aside {
+    padding-bottom: 40px;
+  }
+
   svg,
   button {
     color: $text-theme-primary;

@@ -18,63 +18,75 @@ function initializeState() {
 }
 
 function addList(name, state) {
+  const newState = state;
+
   if (!state.lists.some((el) => el.name === name.toLowerCase())) {
-    state.lists.push({
+    newState.lists.push({
       name: name.toLowerCase(),
       todos: 0,
     });
   }
-  localStorage.setItem('state', JSON.stringify(state));
+
+  localStorage.setItem('state', JSON.stringify(newState));
 }
 
 function addTodo({ todo, list }, state) {
-  state.todos.push({
+  const newState = state;
+  newState.todos.push({
     id: shortid.generate(),
     todo,
-    list,
+    list: list.toLowerCase(),
     priority: 'normal',
   });
-  state.lists.map((el) => {
-    if (el.name === list) {
+  newState.lists.map((el) => {
+    if (el.name === list.toLowerCase()) {
       el.todos += 1;
     }
+    return el;
   });
-  localStorage.setItem('state', JSON.stringify(state));
+
+  localStorage.setItem('state', JSON.stringify(newState));
 }
 
 function toggleStatus(id, state) {
-  state.todos.map((todo) => {
+  const newState = state;
+
+  newState.todos.map((todo) => {
     if (todo.id === id) {
       todo.status = todo.status !== true;
     }
     return todo;
   });
-  
-  localStorage.setItem('state', JSON.stringify(state));
+
+  localStorage.setItem('state', JSON.stringify(newState));
 }
 
 function removeTodo(id, state) {
-  const todo = state.todos.find((todo) => todo.id === id);
-  state.todos = state.todos.filter((el) => el.id !== id);
-  state.lists.map((list) => {
+  const newState = state;
+
+  const todo = newState.todos.find((todo) => todo.id === id);
+  newState.todos = newState.todos.filter((el) => el.id !== id);
+  newState.lists.map((list) => {
     if (list.name === todo.list) {
       list.todos -= 1;
     }
     return list;
   });
 
-  localStorage.setItem('state', JSON.stringify(state));
+  localStorage.setItem('state', JSON.stringify(newState));
 }
 
 function editTodoField(id, field, value, state) {
-  state.todos.map((todo) => {
+  const newState = state;
+
+  newState.todos.map((todo) => {
     if (todo.id === id) {
       todo[field] = value;
     }
     return todo;
   });
 
-  localStorage.setItem('state', JSON.stringify(state));
+  localStorage.setItem('state', JSON.stringify(newState));
 }
 
 export default {

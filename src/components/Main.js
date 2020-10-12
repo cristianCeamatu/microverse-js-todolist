@@ -4,10 +4,10 @@ import AddTodoForm from './AddTodoForm';
 import TodoItem from './TodoItem';
 
 export default function component(todos, activeList = 'default') {
-  const element = document.createElement('main');
   const listTodos = [...todos].filter(el => el.list === activeList);
   const dueOrPassed = [...todos].filter(todo => moment(todo.dueDate).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD'));
 
+  const element = document.createElement('main');
   element.innerHTML = `
     <div class="container-fluid py-4">
       <div class="main-header d-flex align-items-center justify-content-between text-color-primary">

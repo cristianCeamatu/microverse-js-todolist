@@ -1,4 +1,4 @@
-export default function component(list) {
+const AddTodoForm = (list) => {
   const element = document.createElement('ul');
   element.className = 'main-items list-unstyled mb-0';
 
@@ -14,4 +14,6 @@ export default function component(list) {
   `;
 
   return element.outerHTML;
-}
+};
+
+export default AddTodoForm;

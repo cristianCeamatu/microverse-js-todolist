@@ -1,6 +1,6 @@
 import avatar from '../assets/images/avatar.jpg';
 
-export default function component() {
+const Navbar = () => {
   const element = document.createElement('header');
 
   element.innerHTML = `
@@ -29,5 +29,7 @@ export default function component() {
     </nav>
   `;
 
-  return element;
-}
+  return element.outerHTML;
+};
+
+export default Navbar;

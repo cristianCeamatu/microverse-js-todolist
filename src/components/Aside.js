@@ -1,15 +1,14 @@
-import moment from 'moment';
-
 import ListItem from './ListItem';
 
-export default function component({
-  lists,
-  todos,
-}, activeList = 'default') {
-  const addedLists = lists.filter((el) => el.name !== 'default');
-  const itemsWithoutList = todos.filter((el) => el.list === 'default');
-  const dueOrPassed = todos.filter(todo => moment(todo.dueDate).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD'));
+import {
+  addedLists,
+  itemsWithoutList,
+  dueOrPassed,
+  addActiveClass,
+  arrayToDom,
+} from '../view_helpers/aside';
 
+const Aside = ({ lists, todos }, activeList = 'default') => {
   const element = document.createElement('aside');
 
   element.innerHTML = `
@@ -18,17 +17,23 @@ export default function component({
 
       <ul class="list-unstyled side-nav-header-links pb-1 border-bottom mb-0" id="side-nav-header">
         <li>
-          <span><i class="fas fa-home"></i> <a href="#" class="list-navigation ${(activeList === 'default') ? 'active' : ''}" data-list="default">Default</a></span>
-          <span class="count ml-3 hide-on-toggle">${itemsWithoutList.length}</span>
+          <span><i class="fas fa-home"></i> <a href="#" class="list-navigation ${addActiveClass(
+    activeList,
+  )}" data-list="default">Default</a></span>
+          <span class="count ml-3 hide-on-toggle">${itemsWithoutList(
+    todos,
+  )}</span>
         </li>
         <li class="pb-0">
-            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation ${(activeList === 'due-or-passed') ? 'active' : ''}" data-list="due-or-passed">Passed/No date</a></span>
-            <span class="count ml-3 hide-on-toggle">${dueOrPassed.length}</span>
+            <span><i class="fas fa-sun"></i> <a href="#" class="list-navigation ${
+  activeList === 'due-or-passed' ? 'active' : ''
+}" data-list="due-or-passed">Passed/No date</a></span>
+            <span class="count ml-3 hide-on-toggle">${dueOrPassed(todos)}</span>
         </li>
       </ul>
 
       <ul class="list-unstyled side-nav-main-links" id="side-nav-main">
-        <li>${[...addedLists].map((list) => ListItem(list, activeList)).join('')}</li>
+        <li>${arrayToDom(addedLists(lists), ListItem, activeList)}</li>
       </ul>
 
       <div class="side-nav-actions text-center">
@@ -53,4 +58,6 @@ export default function component({
   `;
 
   return element.outerHTML;
-}
+};
+
+export default Aside;

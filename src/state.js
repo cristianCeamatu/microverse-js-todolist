@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 
-function initializeState() {
+const initializeState = () => {
   const state = localStorage.getItem('state') === null
     ? {
       todos: [],
@@ -14,9 +14,9 @@ function initializeState() {
     : JSON.parse(localStorage.getItem('state'));
 
   return state;
-}
+};
 
-function addList(name, state) {
+const addList = (name, state) => {
   const newState = state;
 
   if (!state.lists.some((el) => el.name === name.toLowerCase())) {
@@ -27,9 +27,9 @@ function addList(name, state) {
   }
 
   localStorage.setItem('state', JSON.stringify(newState));
-}
+};
 
-function addTodo({ todo, list }, state) {
+const addTodo = ({ todo, list }, state) => {
   const newState = state;
   newState.todos.push({
     id: shortid.generate(),
@@ -45,9 +45,9 @@ function addTodo({ todo, list }, state) {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
-}
+};
 
-function toggleStatus(id, state) {
+const toggleStatus = (id, state) => {
   const newState = state;
 
   newState.todos.map((todo) => {
@@ -58,9 +58,9 @@ function toggleStatus(id, state) {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
-}
+};
 
-function removeTodo(id, state) {
+const removeTodo = (id, state) => {
   const newState = state;
 
   const todo = newState.todos.find((todo) => todo.id === id);
@@ -73,9 +73,9 @@ function removeTodo(id, state) {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
-}
+};
 
-function editTodoField(id, field, value, state) {
+const editTodoField = (id, field, value, state) => {
   const newState = state;
 
   newState.todos.map((todo) => {
@@ -86,7 +86,7 @@ function editTodoField(id, field, value, state) {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
-}
+};
 
 export default {
   initializeState,

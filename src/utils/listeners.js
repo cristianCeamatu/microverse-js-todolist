@@ -5,16 +5,16 @@ import dom from './dom';
 
 let state = stateActions.initializeState();
 
-function formToggler() {
+const formToggler = () => {
   document.querySelector('#add-list-toggler').addEventListener('click', (e) => {
     e.preventDefault();
 
     e.target.classList.toggle('hide');
     document.querySelector('#add-list-form').classList.toggle('hide');
   });
-}
+};
 
-function todoStatus() {
+const todoStatus = () => {
   document.querySelectorAll('.todo_toggle_status').forEach((el) => {
     el.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -24,9 +24,9 @@ function todoStatus() {
       e.target.nextElementSibling.classList.toggle('todo-done');
     });
   });
-}
+};
 
-function editTodoFields() {
+const editTodoFields = () => {
   document.querySelectorAll('.edit-todo').forEach((el) => {
     el.addEventListener('input', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -45,9 +45,9 @@ function editTodoFields() {
       }
     });
   });
-}
+};
 
-function showTodoOnClick() {
+const showTodoOnClick = () => {
   document.querySelectorAll('.show-todo-toggler').forEach((el) => {
     el.addEventListener('click', (e) => {
       state = stateActions.initializeState();
@@ -58,9 +58,9 @@ function showTodoOnClick() {
       editTodoFields();
     });
   });
-}
+};
 
-function sideNavigation() {
+const sideNavigation = () => {
   document.querySelectorAll('.list-navigation').forEach((el) => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
@@ -79,9 +79,9 @@ function sideNavigation() {
       if (list !== 'due-or-passed') addTodoForm(state);
     });
   });
-}
+};
 
-function removeTodoButton() {
+const removeTodoButton = () => {
   document.querySelectorAll('.remove-todo').forEach((el) => {
     el.addEventListener('click', (e) => {
       stateActions.removeTodo(e.target.getAttribute('data-id'), state);
@@ -100,9 +100,9 @@ function removeTodoButton() {
       if (list !== 'due-or-passed') addTodoForm(state);
     });
   });
-}
+};
 
-function addTodoForm() {
+const addTodoForm = () => {
   document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const list = e.target.getAttribute('data-list').toLowerCase();
@@ -122,9 +122,9 @@ function addTodoForm() {
 
     init();
   });
-}
+};
 
-function addListForm() {
+const addListForm = () => {
   document.querySelector('#add-list-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -140,9 +140,9 @@ function addListForm() {
 
     init();
   });
-}
+};
 
-function init() {
+const init = () => {
   formToggler();
   sideNavigation(state);
   addListForm(state);
@@ -150,7 +150,7 @@ function init() {
   todoStatus(state);
   removeTodoButton(state);
   showTodoOnClick(state);
-}
+};
 
 export default {
   init,

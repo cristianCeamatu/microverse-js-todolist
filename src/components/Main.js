@@ -1,17 +1,17 @@
-import moment from 'moment';
+import { currentTodos, listTitle, addFormIf } from '../view_helpers/main';
 
 import AddTodoForm from './AddTodoForm';
 import TodoItem from './TodoItem';
 
-export default function component(todos, activeList = 'default') {
-  const listTodos = [...todos].filter(el => el.list === activeList);
-  const dueOrPassed = [...todos].filter(todo => moment(todo.dueDate).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD'));
-
+const Main = (todos, activeList = 'default') => {
   const element = document.createElement('main');
+
   element.innerHTML = `
     <div class="container-fluid py-4">
       <div class="main-header d-flex align-items-center justify-content-between text-color-primary">
-        <h1 class="main-header-title h5 text-capitalize">${activeList.split('-').join(' ')}</h1>
+        <h1 class="main-header-title h5 text-capitalize">${listTitle(
+    activeList,
+  )}</h1>
 
       <ul class="main-header-links list-unstyled mb-0 d-flex align-items-center">
           <li class="mr-2"><a href="javascript:;"><i class="far fa-lightbulb"></i> Suggestions</a></li>
@@ -20,16 +20,16 @@ export default function component(todos, activeList = 'default') {
       </div>
 
       <section class="main">
-        ${activeList === 'due-or-passed' ? '' : AddTodoForm(activeList)}
+        ${addFormIf(activeList, 'due-or-passed', AddTodoForm)}
 
         <ul class="main-items list-unstyled mb-0">
-          ${activeList === 'due-or-passed'
-    ? [...dueOrPassed].reverse().map((todo) => TodoItem(todo, activeList)).join('')
-    : [...listTodos].reverse().map((todo) => TodoItem(todo, activeList)).join('')}
+          ${currentTodos(todos, activeList, TodoItem)}
         </ul>
       </section>
     </div>
   `;
 
   return element.outerHTML;
-}
+};
+
+export default Main;

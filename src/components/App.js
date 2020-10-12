@@ -2,11 +2,11 @@ import Navbar from './Navbar';
 import Aside from './Aside';
 import Main from './Main';
 
-export default function App(state) {
+const App = (state) => {
   const element = document.createElement('div');
 
   element.innerHTML = `
-    ${Navbar().outerHTML}
+    ${Navbar()}
     <div class="d-flex">
       <div id="aside-nav" class="bg-light">
       ${Aside(state)}
@@ -19,4 +19,6 @@ export default function App(state) {
     </div>
   `;
   return element;
-}
+};
+
+export default App;

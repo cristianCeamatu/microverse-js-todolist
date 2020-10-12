@@ -6,7 +6,6 @@ export default function component({
   notes,
   priority,
   id,
-  status,
   dueDate,
 }) {
   const tommorow = moment().add(1, 'd').format('YYYY-MM-DD');
@@ -23,25 +22,25 @@ export default function component({
     <div class="mx-3 p-3 my-2 shadow-sm">
       <p>Description:</p>
       <textarea class="flex-fill form-control ml-2 main-item-text edit-todo" data-field="description" data-id="${id}">${
-    description || 'Add a description'
-  }</textarea>
+  description || 'Add a description'
+}</textarea>
     </div>
 
     <div class="mx-3 p-3 my-2 shadow-sm">Due date ${
-      !dueDate ? '(not set)' : ''
-    }: <input type="date" id="due-date" class="form-control edit-todo" data-field="dueDate" value="${
-    dueDate ? moment(dueDate).format('YYYY-MM-DD') : tommorow
-  }" data-id="${id}"></div>
+  !dueDate ? '(not set)' : ''
+}: <input type="date" id="due-date" class="form-control edit-todo" data-field="dueDate" value="${
+  dueDate ? moment(dueDate).format('YYYY-MM-DD') : tommorow
+}" data-id="${id}"></div>
 
     <div class="mx-3 p-3 my-2 shadow-sm">
       Priority:
       <select name="priority" id="priority" class="ml-2 form-control edit-todo" data-field="priority" data-id="${id}">
         <option value="urgent" ${
-          priority === 'urgent' && 'selected'
-        }>Urgent</option>
+  priority === 'urgent' && 'selected'
+}>Urgent</option>
         <option value="later" ${
-          priority === 'later' && 'selected'
-        }>Later</option>
+  priority === 'later' && 'selected'
+}>Later</option>
         <option value="normal" ${priority === 'normal' && 'selected'}>Normal</option>
       </select>
     </div>
@@ -49,8 +48,8 @@ export default function component({
     <div class="mx-3 p-3 my-2 shadow-sm">
       <p>Notes:</p>
       <textarea class="flex-fill form-control ml-2 main-item-text edit-todo" data-field="notes" data-id="${id}">${
-    notes || 'Add notes'
-  }</textarea>
+  notes || 'Add notes'
+}</textarea>
     </div>
   `;
 

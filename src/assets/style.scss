@@ -50,6 +50,11 @@ header {
   }
 }
 
+.main li {
+  padding: 15px 15px 15px 0;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.281);
+}
+
 #aside-nav {
   min-width: 20%;
   word-break: break-all;
@@ -67,7 +72,7 @@ header {
     color: $text-theme-primary;
   }
 
-  ul li {
+  li {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -94,11 +99,6 @@ header {
 main {
   .main-header-links {
     font-size: 14px;
-  }
-
-  section.main li {
-    padding: 15px 15px 15px 0;
-    border-bottom: 1px solid rgba(160, 160, 160, 0.281);
   }
 
   .main-items {

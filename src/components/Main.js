@@ -11,7 +11,7 @@ export default function component(todos, activeList = 'default') {
   element.innerHTML = `
     <div class="container-fluid py-4">
       <div class="main-header d-flex align-items-center justify-content-between text-color-primary">
-        <h1 class="main-header-title h5 text-capitalize">${activeList.split('-').join(" ")}</h1>
+        <h1 class="main-header-title h5 text-capitalize">${activeList.split('-').join(' ')}</h1>
 
       <ul class="main-header-links list-unstyled mb-0 d-flex align-items-center">
           <li class="mr-2"><a href="javascript:;"><i class="far fa-lightbulb"></i> Suggestions</a></li>
@@ -23,10 +23,9 @@ export default function component(todos, activeList = 'default') {
         ${activeList === 'due-or-passed' ? '' : AddTodoForm(activeList)}
 
         <ul class="main-items list-unstyled mb-0">
-          ${activeList === 'due-or-passed' ?
-          [...dueOrPassed].reverse().map((todo) => TodoItem(todo, activeList)).join('')
-            :  
-          [...listTodos].reverse().map((todo) => TodoItem(todo, activeList)).join('')}
+          ${activeList === 'due-or-passed'
+    ? [...dueOrPassed].reverse().map((todo) => TodoItem(todo, activeList)).join('')
+    : [...listTodos].reverse().map((todo) => TodoItem(todo, activeList)).join('')}
         </ul>
       </section>
     </div>

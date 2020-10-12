@@ -6,7 +6,6 @@ export default function component({
   lists,
   todos,
 }, activeList = 'default') {
-
   const addedLists = lists.filter((el) => el.name !== 'default');
   const itemsWithoutList = todos.filter((el) => el.list === 'default');
   const dueOrPassed = todos.filter(todo => moment(todo.dueDate).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD'));

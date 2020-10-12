@@ -17,9 +17,9 @@ export default function component({
     data-id="${id}" class="todo_toggle_status" ${status ? 'checked' : ''}>
     <p class="mb-0 flex-fill ${status && 'todo-done'}">
       <a href="#" class="show-todo-toggler" data-id="${id}">${todo}</a></p>
-    <p class="text-danger remove-todo mb-0" data-id="${id}"  data-list="${activeList}">
-      ${dueDate ? `<span class="font-weight-bold">due ${moment(dueDate).startOf('hour').fromNow()}<span>` : ''}
-      <i class="fas fa-trash"></i>
+    <p class="remove-todo mb-0" data-id="${id}" data-list="${activeList}">
+      ${dueDate ? `<span>due ${moment(dueDate).startOf('hour').fromNow()}<span>` : ''}
+      <i class="fas fa-trash text-danger"></i>
     </p>
   `;
 

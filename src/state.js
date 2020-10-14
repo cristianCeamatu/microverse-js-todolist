@@ -1,17 +1,18 @@
 import shortid from 'shortid';
 
 const initializeState = () => {
-  const state = localStorage.getItem('state') === null
-    ? {
-      todos: [],
-      lists: [
-        {
-          name: 'default',
-          todos: 0,
-        },
-      ],
-    }
-    : JSON.parse(localStorage.getItem('state'));
+  const state =
+    localStorage.getItem('state') === null
+      ? {
+          todos: [],
+          lists: [
+            {
+              name: 'default',
+              todos: 0,
+            },
+          ],
+        }
+      : JSON.parse(localStorage.getItem('state'));
 
   return state;
 };
@@ -27,6 +28,8 @@ const addList = (name, state) => {
   }
 
   localStorage.setItem('state', JSON.stringify(newState));
+
+  return newState;
 };
 
 const addTodo = ({ todo, list }, state) => {
@@ -45,6 +48,8 @@ const addTodo = ({ todo, list }, state) => {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
+
+  return newState;
 };
 
 const toggleStatus = (id, state) => {
@@ -58,6 +63,8 @@ const toggleStatus = (id, state) => {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
+
+  return newState;
 };
 
 const removeTodo = (id, state) => {
@@ -73,6 +80,8 @@ const removeTodo = (id, state) => {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
+
+  return newState;
 };
 
 const editTodoField = (id, field, value, state) => {
@@ -86,6 +95,8 @@ const editTodoField = (id, field, value, state) => {
   });
 
   localStorage.setItem('state', JSON.stringify(newState));
+
+  return newState;
 };
 
 export default {

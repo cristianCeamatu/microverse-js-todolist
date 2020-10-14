@@ -4,10 +4,11 @@
   "description": "node_modules/",
   "private": true,
   "scripts": {
+    "test": "jest --watchAll --testPathPattern=src/tests/",
     "eslint": "eslint .",
     "stylelint": "stylelint \"**/*.scss\"",
     "fix": "stylelint --fix \"**/*.scss\" && eslint . --fix",
-    "test": "npm run fix && npm run stylelint && npm run eslint && echo '🎉 All test pass 🎉'",
+    "linters": "npm run fix && npm run stylelint && npm run eslint && echo '🎉 All test pass 🎉'",
     "build": "webpack --mode=production",
     "watch": "webpack --watch --mode=development",
     "dev": "webpack-dev-server --mode=development"
@@ -24,12 +25,14 @@
   },
   "homepage": "https://github.com/cristianCeamatu/template-eslint-stylelint#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
     "babel-eslint": "^10.1.0",
     "css-loader": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "file-loader": "^6.1.0",
+    "jest": "^26.5.3",
     "node-sass": "^4.14.1",
     "sass": "^1.26.12",
     "sass-loader": "^10.0.2",

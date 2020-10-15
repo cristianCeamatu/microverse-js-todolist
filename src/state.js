@@ -1,18 +1,17 @@
 import shortid from 'shortid';
 
 const initializeState = () => {
-  const state =
-    localStorage.getItem('state') === null
-      ? {
-          todos: [],
-          lists: [
-            {
-              name: 'default',
-              todos: 0,
-            },
-          ],
-        }
-      : JSON.parse(localStorage.getItem('state'));
+  const state = localStorage.getItem('state') === null
+    ? {
+      todos: [],
+      lists: [
+        {
+          name: 'default',
+          todos: 0,
+        },
+      ],
+    }
+    : JSON.parse(localStorage.getItem('state'));
 
   return state;
 };

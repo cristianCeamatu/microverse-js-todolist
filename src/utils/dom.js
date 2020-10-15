@@ -17,7 +17,10 @@ const refreshAside = (state, activeList) => {
 };
 
 const refreshMain = (state, activeList) => {
-  document.querySelector('#main-todos').innerHTML = Main(state.todos, activeList);
+  document.querySelector('#main-todos').innerHTML = Main(
+    state.todos,
+    activeList
+  );
 };
 
 const updateMainAndAside = (state, activeList) => {

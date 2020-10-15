@@ -10,8 +10,8 @@ const Main = (todos, activeList = 'default') => {
     <div class="container-fluid py-4">
       <div class="main-header d-flex align-items-center justify-content-between text-color-primary">
         <h1 class="main-header-title h5 text-capitalize">${listTitle(
-    activeList,
-  )}</h1>
+          activeList
+        )}</h1>
 
       <ul class="main-header-links list-unstyled mb-0 d-flex align-items-center">
           <li class="mr-2"><a href="javascript:;"><i class="far fa-lightbulb"></i> Suggestions</a></li>

@@ -30,7 +30,7 @@ const editTodoFields = () => {
   document.querySelectorAll('.edit-todo').forEach((el) => {
     el.addEventListener('input', (e) => {
       const id = e.target.getAttribute('data-id');
-      const { list } = state.todos.find(el => el.id === id);
+      const { list } = state.todos.find((el) => el.id === id);
       const field = e.target.getAttribute('data-field');
       const { value } = e.target;
 
@@ -70,8 +70,12 @@ const sideNavigation = () => {
       dom.refreshMain(state, list);
       document.querySelector('#show-todo').innerHTML = '';
 
-      document.querySelectorAll('.list-navigation.active').forEach(el => el.classList.remove('active'));
-      document.querySelector(`.list-navigation[data-list="${list}"]`).classList.add('active');
+      document
+        .querySelectorAll('.list-navigation.active')
+        .forEach((el) => el.classList.remove('active'));
+      document
+        .querySelector(`.list-navigation[data-list="${list}"]`)
+        .classList.add('active');
 
       todoStatus();
       removeTodoButton();
@@ -111,14 +115,16 @@ const addTodoForm = () => {
         todo: e.target.elements.todo.value,
         list,
       },
-      state,
+      state
     );
 
     state = stateActions.initializeState();
 
     dom.updateMainAndAside(state, list);
 
-    document.body.querySelector(`.list-navigation[data-list='${list.toLowerCase()}'`).classList.add('active');
+    document.body
+      .querySelector(`.list-navigation[data-list='${list.toLowerCase()}'`)
+      .classList.add('active');
 
     init();
   });
@@ -136,7 +142,9 @@ const addListForm = () => {
 
     dom.updateMainAndAside(state, name);
 
-    document.body.querySelector(`.list-navigation[data-list='${name}'`).classList.add('active');
+    document.body
+      .querySelector(`.list-navigation[data-list='${name}'`)
+      .classList.add('active');
 
     init();
   });

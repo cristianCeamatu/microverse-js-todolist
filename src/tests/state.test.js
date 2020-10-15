@@ -1,4 +1,4 @@
-import state from '../../state';
+import state from '../state';
 
 describe('state object has the methods:', () => {
   describe('initializeState()', () => {

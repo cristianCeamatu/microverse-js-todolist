@@ -26,7 +26,37 @@
 
 ## Prerequisities
 
-To get this project up and running locally, you must clone this repository or download the files and double click on `index.html` found in the `dist` folder.
+To get this project up and running locally, you must have [node](https://nodejs.org/en/) installed locally. Node will automatically install [npm](https://www.npmjs.com/).
+
+## Getting Started
+
+**To get this project set up on your local machine, follow these simple steps:**
+
+**Step 1**<br>
+Navigate through the local folder where you want to clone the repository and run<br>
+`git@github.com:cristianCeamatu/microverse-js-todolist.git`. It will clone the repo to your local folder.<br>
+or with https<br>
+`https://github.com/cristianCeamatu/microverse-js-todolist.git`.<br>
+**Step 2**<br>
+Run `cd microverse-js-todolist`<br>
+**Step 3**<br>
+Run `npm install` to install the npm packages from the `package.json` file.<br>
+**Step 4**<br>
+Run `npm run dev` to start the webpack server, you can now navigate to `http://localhost:3000` to view the app. The server refreshes the app every time you make a change to a file used by it.<br>
+**Step 5**<br>
+Most important, enjoy the app!<br>
+
+## Tests
+
+1. Open Terminal
+
+2. Install dependencies (only if you did not install them previously):
+
+   `npm install`
+
+3. Run the tests with the command:
+
+   `npm test`
 
 ## Authors
 

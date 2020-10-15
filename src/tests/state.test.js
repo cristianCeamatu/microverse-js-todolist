@@ -55,7 +55,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addList('early', defaultState)
-          .lists.some((el) => el.name === 'early')
+          .lists.some((el) => el.name === 'early'),
       ).toStrictEqual(true);
     });
 
@@ -63,13 +63,13 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addList('early', defaultState)
-          .lists.find((el) => el.name === 'early').todos
+          .lists.find((el) => el.name === 'early').todos,
       ).toStrictEqual(0);
     });
 
     it('should add the new item to the localStorage `state` variable', () => {
       expect(state.addList('early', defaultState)).toStrictEqual(
-        JSON.parse(localStorage.getItem('state'))
+        JSON.parse(localStorage.getItem('state')),
       );
     });
   });
@@ -89,7 +89,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addTodo({ todo: 'eat lunch', list: 'default' }, defaultState)
-          .todos.some((el) => el.todo === 'eat lunch')
+          .todos.some((el) => el.todo === 'eat lunch'),
       ).toStrictEqual(true);
     });
 
@@ -97,7 +97,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addTodo({ todo: 'eat lunch', list: 'default' }, defaultState)
-          .todos.find((el) => el.todo === 'eat lunch').priority
+          .todos.find((el) => el.todo === 'eat lunch').priority,
       ).toStrictEqual('normal');
     });
 
@@ -105,7 +105,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addTodo({ todo: 'eat lunch', list: 'default' }, defaultState)
-          .todos.find((el) => el.todo === 'eat lunch').id
+          .todos.find((el) => el.todo === 'eat lunch').id,
       ).toBeDefined();
     });
 
@@ -123,13 +123,13 @@ describe('state object has the methods:', () => {
       expect(
         state
           .addTodo({ todo: 'eat lunch', list: 'default' }, defaultState)
-          .lists.find((el) => el.name === 'default').todos
+          .lists.find((el) => el.name === 'default').todos,
       ).toStrictEqual(4);
     });
 
     it('should add the new item to the localStorage `state` variable', () => {
       expect(
-        state.addTodo({ todo: 'eat lunch', list: 'default' }, defaultState)
+        state.addTodo({ todo: 'eat lunch', list: 'default' }, defaultState),
       ).toStrictEqual(JSON.parse(localStorage.getItem('state')));
     });
   });
@@ -156,7 +156,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .toggleStatus('12', defaultState)
-          .todos.find((el) => el.id === '12').status
+          .todos.find((el) => el.id === '12').status,
       ).toStrictEqual(true);
     });
 
@@ -182,7 +182,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .toggleStatus('12', defaultState)
-          .todos.find((el) => el.id === '12').status
+          .todos.find((el) => el.id === '12').status,
       ).toStrictEqual(false);
     });
 
@@ -206,7 +206,7 @@ describe('state object has the methods:', () => {
       };
 
       expect(state.toggleStatus('12', defaultState)).toStrictEqual(
-        JSON.parse(localStorage.getItem('state'))
+        JSON.parse(localStorage.getItem('state')),
       );
     });
   });
@@ -233,7 +233,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .removeTodo('12', defaultState)
-          .todos.some((el) => el.todo === 'first')
+          .todos.some((el) => el.todo === 'first'),
       ).toStrictEqual(false);
     });
 
@@ -258,7 +258,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .removeTodo('12', defaultState)
-          .lists.find((el) => el.name === 'default').todos
+          .lists.find((el) => el.name === 'default').todos,
       ).toStrictEqual(1);
     });
 
@@ -281,7 +281,7 @@ describe('state object has the methods:', () => {
       };
 
       expect(state.removeTodo('12', defaultState)).toStrictEqual(
-        JSON.parse(localStorage.getItem('state'))
+        JSON.parse(localStorage.getItem('state')),
       );
     });
   });
@@ -308,7 +308,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .editTodoField('12', 'todo', 'second', defaultState)
-          .todos.find((el) => el.id === '12').todo
+          .todos.find((el) => el.id === '12').todo,
       ).toStrictEqual('second');
     });
 
@@ -316,7 +316,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .editTodoField('12', 'priority', 'urgent', defaultState)
-          .todos.find((el) => el.id === '12').priority
+          .todos.find((el) => el.id === '12').priority,
       ).toStrictEqual('urgent');
     });
 
@@ -324,7 +324,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .editTodoField('12', 'description', 'description', defaultState)
-          .todos.find((el) => el.id === '12').description
+          .todos.find((el) => el.id === '12').description,
       ).toStrictEqual('description');
     });
 
@@ -332,7 +332,7 @@ describe('state object has the methods:', () => {
       expect(
         state
           .editTodoField('12', 'notes', 'notes', defaultState)
-          .todos.find((el) => el.id === '12').notes
+          .todos.find((el) => el.id === '12').notes,
       ).toStrictEqual('notes');
     });
 
@@ -340,13 +340,13 @@ describe('state object has the methods:', () => {
       expect(
         state
           .editTodoField('12', 'date', '17/09/2020', defaultState)
-          .todos.find((el) => el.id === '12').date
+          .todos.find((el) => el.id === '12').date,
       ).toStrictEqual('17/09/2020');
     });
 
     it('update the localStorage with the details', () => {
       expect(
-        state.editTodoField('12', 'date', '17/09/2020', defaultState)
+        state.editTodoField('12', 'date', '17/09/2020', defaultState),
       ).toStrictEqual(JSON.parse(localStorage.getItem('state')));
     });
   });

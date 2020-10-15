@@ -4,7 +4,7 @@
   "description": "node_modules/",
   "private": true,
   "scripts": {
-    "test": "jest --watchAll --testPathPattern=src/tests/",
+    "test": "jest --watchAll --testPathPattern=src/tests/ --collect-coverage",
     "eslint": "eslint .",
     "stylelint": "stylelint \"**/*.scss\"",
     "fix": "stylelint --fix \"**/*.scss\" && eslint . --fix",

@@ -115,7 +115,7 @@ const addTodoForm = () => {
         todo: e.target.elements.todo.value,
         list,
       },
-      state
+      state,
     );
 
     state = stateActions.initializeState();

@@ -19,7 +19,12 @@ const currentTodos = (todos, activeList, Node) => (activeList === 'due-or-passed
   ? dueOrPassed(todos, activeList, Node)
   : listTodos(todos, activeList, Node));
 
-const listTitle = (activeList) => activeList.split('-').join(' ');
+const listTitle = (activeList) => {
+  if (typeof activeList !== 'string') {
+    return 'Please use a string as parameter';
+  }
+  return activeList.split('-').join(' ');
+};
 
 const addFormIf = (firstParam, secondParam, Node) => (firstParam === secondParam ? '' : Node(firstParam));
 
